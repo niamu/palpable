@@ -68,12 +68,19 @@
                          "curl \"" (book-url book (customer-id page)) "\""
                          " -o " (str source-dir
                                      "\"" (book-title book) "\"" ".aax;\n")
+                         "ffmpeg -i "
+                         (str source-dir "\"" (book-title book) "\"" ".aax") " "
+                         (str source-dir "\"" (book-title book) "\"" ".png")
+                         ";\n"
                          "ffmpeg -activation_bytes "
                          (:activation-bytes config)
                          " -i "
                          (str source-dir "\"" (book-title book) "\"" ".aax")
-                         " -c:a copy -vn "
-                         (str clean-dir "\"" (book-title book) "\"" ".m4a")
-                         ";\n\n")
+                         " -c:a copy -vn -f mp4"
+                         (str clean-dir "\"" (book-title book) "\"" ".m4b")
+                         ";\n"
+                         "mp4art --add "
+                         (str source-dir "\"" (book-title book) "\"" ".png") " "
+                         (str clean-dir "\"" (book-title book) "\"" ".m4b;\n\n"))
                     :append true)))
           (books page)))))

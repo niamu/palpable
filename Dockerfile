@@ -1,7 +1,7 @@
-FROM clojure:lein-2.7.1-alpine
+FROM clojure:lein-2.7.1
 
-RUN apk update && \
-    apk add ffmpeg
+RUN apt-get update && \
+    apt-get install -y ffmpeg mp4v2-utils
 
 COPY . /usr/src/palpable/
 WORKDIR /usr/src/palpable/

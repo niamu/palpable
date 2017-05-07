@@ -30,18 +30,23 @@ pagination.
 
 ## Usage
 
-Optionally build and run the Docker image which contains `clojure` and
-`ffmpeg` as a convenience.
+Optionally build and run the Docker image which contains `clojure`,
+`ffmpeg`, and `mp4art` already.
 
 ```BASH
-docker build -t palpable .;
-docker run --rm -it palpable;
+docker build -t palpable .
+docker run \
+    --rm -it \
+    -v $(pwd)/resources:/usr/src/palpable/resources \
+    palpable
 ```
 
 Or simply execute `script/run.sh` which will generate and execute a
 secondary script `script/download.sh`. It will first download all of
 the source audiobooks from Audible and then use the `activation-bytes`
 with `ffmpeg` to copy the audio track into a new file without the DRM.
+
+`mp4art` adds the cover art to the new, clean m4b files.
 
 Once done, you'll have the original DRM files from Audible available
 in "resources/sources/" and the DRM-free variants available in

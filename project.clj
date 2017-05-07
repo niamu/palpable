@@ -5,4 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [hickory "0.7.1"]]
-  :main palpable.core)
+  :main palpable.core
+  :clean-targets ^{:protect false} ["resources/sources"
+                                    "resources/clean"
+                                    "target"])
