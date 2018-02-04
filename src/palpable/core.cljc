@@ -55,7 +55,8 @@
   [& args]
   (let [page (-> (slurp "resources/library.html") h/parse h/as-hickory)]
     (spit "script/download.sh"
-          "#!/bin/sh\n\n")
+          (str "#!/bin/sh\n\n"
+               "set -e\n\n"))
     (doall
      (map (fn [book]
             (let [source-dir (str "\"resources/sources/"
